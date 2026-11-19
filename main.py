@@ -11,14 +11,14 @@ from io import BytesIO
 from datetime import datetime, timedelta
 
 st.set_page_config(layout="wide")
-st.title("Имитация пассажирских маршрутов Оренбурга")
+st.title("Имитация пассажирских маршрутов")
 
 @st.cache_data(show_spinner=False)
 def get_osm_routes_overpass():
     overpass_url = "http://overpass-api.de/api/interpreter"
     query = '''
     [out:json][timeout:60];
-    area["name"="Оренбург"]->.a;
+    way(166155507); map_to_area ->.a;
     (
       relation["route"="bus"](area.a);
       relation["route"="share_taxi"](area.a);
